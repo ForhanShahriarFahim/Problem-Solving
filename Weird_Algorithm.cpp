@@ -25,10 +25,7 @@ typedef vector<ll> vl;
 #define setbits(x) __builtin_popcountll(x)
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
-#define FastIO               \
-    ios::sync_with_stdio(0); \
-    cin.tie(0);              \
-    cout.tie(0);
+#define FastIO ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 //**************************************************************************************************************************************************************************
 
 void c_p_c()
@@ -39,36 +36,35 @@ void c_p_c()
 #endif
 }
 
+
+
 void solve()
 {
-    int a;
-    cin >> a;
-    int arr[a];
-    for (int i = 0; i < a; i++)
-        cin >> arr[i];
-    bool flag = true;
-    for (int i = 0; i < a; i++)
+    ll n;
+    cin>>n;
+    cout<<n<<" ";
+    while(n!=1)
     {
-        for (int j = i + 2; j < a; j++)
+        if(n % 2)
         {
-            if (arr[i] == arr[j])
-            {
-                flag = false;
-                cout << "YES" << endl;
-                return;
-            }
+            n=n*3+1;
+           // cout<<"n: "<<n<<endl;
         }
+        else n>>=1;
+        cout<<n<<" ";
     }
-    if (flag)
-        cout << "NO" << endl;
 }
-int main()
+
+
+
+int main(int argc, char const *argv[])
 {
     //c_p_c();
-    int t;
-    cin >> t;
-    while (t--)
-    {
+    FastIO;
+    int t = 1;
+    //cin>>t;
+    for (int i = 0; i < t; i++)
         solve();
-    }
+    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    return 0;
 }

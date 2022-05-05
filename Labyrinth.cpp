@@ -25,50 +25,21 @@ typedef vector<ll> vl;
 #define setbits(x) __builtin_popcountll(x)
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
-#define FastIO               \
-    ios::sync_with_stdio(0); \
-    cin.tie(0);              \
-    cout.tie(0);
+#define FastIO ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 //**************************************************************************************************************************************************************************
 
 void c_p_c()
 {
 #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
+   freopen("input.txt", "r", stdin);
+   freopen("output.txt", "w", stdout);
+#endif   
 }
 
-void solve()
+int main(int argc, char const *argv[])
 {
-    int a;
-    cin >> a;
-    int arr[a];
-    for (int i = 0; i < a; i++)
-        cin >> arr[i];
-    bool flag = true;
-    for (int i = 0; i < a; i++)
-    {
-        for (int j = i + 2; j < a; j++)
-        {
-            if (arr[i] == arr[j])
-            {
-                flag = false;
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    if (flag)
-        cout << "NO" << endl;
+    //c_p_c();    
+    FastIO;
+    
 }
-int main()
-{
-    //c_p_c();
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
-}
+
