@@ -73,39 +73,35 @@ void c_p_c()
 #endif
 }
 
-
-
 void solve()
 {
-    ll n,sum = 0;
-    cin>>n;
+    ll n, sum = 0;
+    cin >> n;
     ll arr[n];
 
-    for(int i = 0;i<n;i++)
+    for (int i = 0; i < n; i++)
     {
-        cin>>arr[i];
+        cin >> arr[i];
     }
     ll m = arr[0];
-    for(int i = 1;i<n;i++)
+    for (int i = 1; i < n; i++)
     {
-        sum+=max(0LL,m-arr[i]);   
-        m = max(m,arr[i]);    
+        sum += max(0LL, m - arr[i]);
+        m = max(m, arr[i]);
     }
-    cout<<sum<<endl;
+    cout << sum << endl;
 }
-
-
 
 int main(int argc, char const *argv[])
 {
-   // c_p_c();
+    // c_p_c();
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    //cin>>t;
+    // cin>>t;
     for (int i = 0; i < t; i++)
         solve();
     cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";

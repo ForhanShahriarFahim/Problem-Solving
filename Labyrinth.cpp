@@ -38,7 +38,7 @@ void c_p_c()
 
 int main(int argc, char const *argv[])
 {
-    //c_p_c();    
+    //c_p_c ();    
     FastIO;
     
 }
