@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "1. Problem Solving",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp"
+		}
+	}
+}
