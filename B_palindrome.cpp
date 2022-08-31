@@ -46,6 +46,7 @@ void solve()
     int arr[a];
     for (int i = 0; i < a; i++)
         cin >> arr[i];
+    
     bool flag = true;
     for (int i = 0; i < a; i++)
     {
