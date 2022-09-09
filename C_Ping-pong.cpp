@@ -92,6 +92,6 @@ int main(int argc, char const *argv[])
     cin >> t;
     for (int i = 0; i < t; i++)
         solve();
-    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    //cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
