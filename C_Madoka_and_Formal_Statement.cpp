@@ -81,7 +81,52 @@ const int N = 200005;
 
 void solve()
 {
+<<<<<<< HEAD
     
+=======
+    int n;
+    cin>>n;
+    int a[n], b[n];
+    for(int i = 0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    for(int i = 0;i<n;i++)
+    {
+        cin>>b[i];
+    }
+    vector<int>v;
+    for(int i = 0;i<n;i++)
+    {
+        if(a[i]>b[i])
+        {
+            cout<<"NO"<<endl;
+            return;
+        }
+        else if(a[i]!=b[i])
+        {
+            v.pb(i);
+        }
+    }
+    if(v.size() == 0)
+    {
+        cout<<"YES"<<endl;
+    }
+    else 
+    {
+        for(int i = 0;i<v.size();i++)
+        {
+            int next = (v[i] + 1)%n;
+            if(b[v[i]] - 1<= b[next]) continue;
+            else
+            {
+                cout << "NO" << endl;
+                return;
+            } 
+        }
+        cout<<"YES"<<endl;
+    }
+>>>>>>> cc611594a7a30afc35332f71c2fd21e61c0d34e4
 }
 
 int main(int argc, char const *argv[])
