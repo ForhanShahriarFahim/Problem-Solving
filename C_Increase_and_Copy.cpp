@@ -18,7 +18,6 @@ int main() {
 			ans = min(ans, x - 1 + ((n - x) + x - 1) / x);
 		}
 		cout << ans << endl;
-	}
-	
+	}	
 	return 0;
 }

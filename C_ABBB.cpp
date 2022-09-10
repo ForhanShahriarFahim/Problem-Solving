@@ -85,8 +85,7 @@ void solve()
         else 
             cnt++;
         i++;
-    }
-    
+    }    
     cout<<cnt<<endl;
 }
 
