@@ -30,9 +30,17 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a) for (auto x : a) cout << x << " "; cout << endl
-#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
+#define print(a)          \
+    for (auto x : a)      \
+        cout << x << " "; \
+    cout << endl
+#define print1(a)    \
+    for (auto x : a) \
+    cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y)         \
+    for (int i = x; i < y; i++) \
+        cout << a[i] << " ";    \
+    cout << endl
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -81,50 +89,44 @@ const int N = 200005;
 
 void solve()
 {
-
-    int n;
-    cin>>n;
-    int a[n], b[n];
-    for(int i = 0;i<n;i++)
+    ll n;
+    cin >> n;
+    dbg(n);
+    vector<ll> v(n+5);
+    ll even = 0, odd = 0, sum = 0;
+    for (int i = 1; i <= n; i++)
     {
-        cin>>a[i];
+        cin >> v[i];
+        if (i & 1)
+            odd += v[i];
+        else
+            even += v[i];
     }
-    for(int i = 0;i<n;i++)
+    dbg(even, odd);
+    sum = odd + even;
+    if (even <= odd)
     {
-        cin>>b[i];
-    }
-    vector<int>v;
-    for(int i = 0;i<n;i++)
-    {
-        if(a[i]>b[i])
+        dbg(even);
+        for (int i = 1; i <= n; i++)
         {
-            cout<<"NO"<<endl;
-            return;
-        }
-        else if(a[i]!=b[i])
-        {
-            v.pb(i);
-        }
-    }
-    if(v.size() == 0)
-    {
-        cout<<"YES"<<endl;
-    }
-    else 
-    {
-        for(int i = 0;i<v.size();i++)
-        {
-            int next = (v[i] + 1)%n;
-            if(b[v[i]] - 1<= b[next]) continue;
+            if (!(i & 1))
+                cout << "1 ";
             else
-            {
-                cout << "NO" << endl;
-                return;
-            } 
+                cout << v[i] << " ";
         }
-        cout<<"YES"<<endl;
     }
-
+    else
+    {
+        dbg(even);
+        for (int i = 1; i <= n; i++)
+        {
+            if (i & 1)
+                cout << "1 ";
+            else
+                cout << v[i] << " ";
+        }
+    }
+    cout << endl;
 }
 
 int main(int argc, char const *argv[])
