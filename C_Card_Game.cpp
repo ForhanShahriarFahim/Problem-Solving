@@ -1,0 +1,190 @@
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/detail/standard_policies.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+//**************************************************************************************************************************************************************************
+typedef long long ll;
+typedef long double ld;
+typedef unsigned long long ull;
+//**************************************************************************************************************************************************************************
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;
+typedef vector<ll> vl;
+#define mp make_pair
+#define pb push_back
+#define ff first
+#define ss second
+#define mod 998244353
+#define pi acos(-1.0)
+#define eps 1e-9
+#define inf 1e18
+#define endl "\n"
+#define sz(x) (int)((x).size())
+#define gcd(a, b) __gcd(a, b)
+#define LCM(x, y) (((x) / __gcd((x), (y))) * (y))
+#define mem(x, n) memset(x, n, sizeof(x))
+#define setbits(x) __builtin_popcountll(x)
+#define zrobits(x) __builtin_ctzll(x)
+#define ps(x, y) fixed << setprecision(y) << x
+#define All(x) (x).begin(), (x).end()
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
+//**************************************************************************************************************************************************************************
+char gap = 32;
+template <typename T>
+ostream &operator<<(ostream &os, const vector<T> &v)
+{
+    os << '{';
+    for (const auto &x : v)
+        os << gap << x;
+    return os << '}';
+}
+template <typename A, typename B>
+ostream &operator<<(ostream &os, const pair<A, B> &p)
+{
+    return os << '(' << p.first << gap << p.second << ')';
+}
+
+void dbg_out() { cerr << endl; }
+template <typename Head, typename... Tail>
+void dbg_out(Head H, Tail... T)
+{
+    cerr << ' ' << H;
+    dbg_out(T...);
+}
+
+#ifndef ONLINE_JUDGE
+#define dbg(...) cerr << '(' << #__VA_ARGS__ << ')' << ':', dbg_out(__VA_ARGS__)
+#else
+#define dbg(...)
+#endif
+
+typedef tree<int, null_type, less_equal<int>,
+             rb_tree_tag,
+             tree_order_statistics_node_update>
+    ordered_set;
+//*************************************************************************************************************************************************************************
+
+void c_p_c()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+
+const int N = 205;
+int val[1000];
+ll dp[35];
+ll dp2[35];
+void solve()
+{
+
+    ll t,check,n, ans,pern,a,b,c;
+    cin >> t;
+    
+    ll sum = 0;
+    for(int i = 0;i<N;i++)
+    {
+        sum+=i;
+        if(sum<0)
+        {
+            sum++;
+
+        }
+        else if(sum == 1)
+        {
+            sum++;
+        }
+        else sum=0;
+    }
+
+    for(int i = 1;i<31;i++)
+    {
+        n = i*2;
+        pern = 1;
+        for(int k = 0;k<=n/2-1;k++)
+        {
+            pern = pern*(n-k);
+            pern = pern/(k+1);
+        }
+        for (int j = 0; j< N; j++)
+        {
+            sum += i;
+            if (sum < 0)
+            {
+                sum++;
+            }
+            else if (sum == 1)
+            {
+                sum++;
+            }
+            else
+                sum = 0;
+        }
+        dp[i] = 1;
+        for(int k = 0;k<=n/2-1;k++)
+        {
+            dp[i] = dp[i]*(n-1-k);
+            dp[i] = dp[i]/(k+1);
+        }
+        for (int j = 0; j < N; j++)
+        {
+            sum += i;
+            if (sum < 0)
+            {
+                sum++;
+            }
+            else if (sum == 1)
+            {
+                sum++;
+            }
+            else
+                sum = 0;
+        }
+        
+        dp[i] = (dp[i] + dp2[i-1])%mod;
+        for (int j = 0; j < N; j++)
+        {
+            sum += i;
+            if (sum < 0)
+            {
+                sum++;
+            }
+            else if (sum == 1)
+            {
+                sum++;
+            }
+            else
+                sum = 0;
+        }
+        dp2[i] = (pern - dp[i]-1)%mod;
+    }
+    for (int i = 1; i <= t; i++)
+    {
+        cin >> n;
+        cout << dp[n / 2] << " " << dp2[n / 2] << " 1";
+        cout
+            << endl;
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    // c_p_c();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+#ifndef ONLINE_JUDGE
+#endif
+    int t = 1;
+    //cin >> t;
+    for (int i = 0; i < t; i++)
+        solve();
+    // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    return 0;
+}
