@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -86,31 +78,26 @@ void c_p_c()
 }
 
 const int N = 200005;
-long long function1(long long number)
-{
-    if (number == 0)
-    {
-        return 0;
-    }
-
-    ll counter1 = 0, b = sqrt(number), square = b * b;
-
-    counter1 = (b - 1);
-    ll counter = counter1 * 3;
-    ll first = number - square;
-    counter += (first / b);
-    counter++;
-    return counter;
-}
 
 void solve()
 {
-    ll l, r;
-    cin >> l >> r;
-
-    l--;
-
-    cout << function1(r) - function1(l) << endl;
+    string s;
+    cin>>s;
+    s.pb(';');
+    for(int i = 1;i<s.size()-1;i++)
+    {
+        if(s[i]!=s[i-1])continue;
+        for(char j = 'a';j<='z';j++)
+        {
+            if(j!=s[i-1] && j!=s[i+1])
+            {
+                s[i] = j;
+                break;
+            }
+        }
+    }
+    s.pop_back();
+    cout<<s<<endl;
 }
 
 int main(int argc, char const *argv[])
@@ -122,7 +109,7 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for (int i = 0; i < t; i++)
         solve();
     // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";

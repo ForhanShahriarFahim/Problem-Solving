@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -86,31 +78,57 @@ void c_p_c()
 }
 
 const int N = 200005;
-long long function1(long long number)
-{
-    if (number == 0)
-    {
-        return 0;
-    }
-
-    ll counter1 = 0, b = sqrt(number), square = b * b;
-
-    counter1 = (b - 1);
-    ll counter = counter1 * 3;
-    ll first = number - square;
-    counter += (first / b);
-    counter++;
-    return counter;
-}
 
 void solve()
 {
-    ll l, r;
-    cin >> l >> r;
-
-    l--;
-
-    cout << function1(r) - function1(l) << endl;
+    ll n;
+    cin >> n;
+    set<pair<ll, ll>> st;
+    vector<pair<ll, ll>> p;
+    for (int i = 0; i < n; i++)
+    {
+        ll l, r;
+        cin >> l >> r;
+        st.insert(mp(l, r));
+        p.pb(mp(l, r));
+    }
+    vector<pair<pair<ll, ll>, ll>> ans;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = p[i].ff; j <= p[i].ss; j++)
+        {
+            auto pp = mp(p[i].ff, j - 1);
+            auto qq = mp(j + 1, p[i].ss);
+            if (st.find(pp) != st.end() && st.find(qq) != st.end())
+            {
+                ans.pb(mp(mp(p[i].ff, p[i].ss), j));
+                break;
+            }
+            else
+            {
+                if (p[i].ss == p[i].ff)
+                {
+                    ans.pb(mp(mp(p[i].ff, p[i].ss), j));
+                    break;
+                }
+                else if (st.find(pp) != st.end())
+                {
+                    ans.pb(mp(mp(p[i].ff, p[i].ss), j));
+                    break;
+                }
+                else if (st.find(qq) != st.end())
+                {
+                    ans.pb(mp(mp(p[i].ff, p[i].ss), j));
+                    break;
+                }
+            }
+        }
+    }
+    for (auto x : ans)
+    {
+        cout << x.ff.ff << gap << x.ff.ss << gap << x.ss << endl;
+    }
+    cout << endl;
 }
 
 int main(int argc, char const *argv[])

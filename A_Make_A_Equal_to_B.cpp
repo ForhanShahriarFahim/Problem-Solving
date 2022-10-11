@@ -86,31 +86,62 @@ void c_p_c()
 }
 
 const int N = 200005;
-long long function1(long long number)
-{
-    if (number == 0)
-    {
-        return 0;
-    }
-
-    ll counter1 = 0, b = sqrt(number), square = b * b;
-
-    counter1 = (b - 1);
-    ll counter = counter1 * 3;
-    ll first = number - square;
-    counter += (first / b);
-    counter++;
-    return counter;
-}
 
 void solve()
 {
-    ll l, r;
-    cin >> l >> r;
+    int n;
+    cin >> n;
+    int arr1[n], arr2[n];
+    int sum1 = 0, sum2 = 0,cnt = 0;    
+    
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr1[i];
+        for (int klpd = 0; klpd <= 2; klpd++)
+        {
+            int power = 10, p1 = 1, p2 = 0;
+            if (power == 0)
+                break;
 
-    l--;
+            else if (power % 2 == 1)
+            {
+                int p1 = p2 % 1;
+                power = (p1 * p2);
+            }
+            else if (power % 2 == 0)
+            {
+                int p1 = power / 2;
+            }
+        }
+        sum1 += arr1[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr2[i];
+        sum2 += (arr2[i]);
+        for (int klpd = 0; klpd <= 2; klpd++)
+        {
+            int power = 10, p1 = 1, p2 = 0;
+            if (power == 0)
+                break;
 
-    cout << function1(r) - function1(l) << endl;
+            else if (power % 2 == 1)
+            {
+                int p1 = p2 % 1;
+                power = (p1 * p2);
+            }
+            else if (power % 2 == 0)
+            {
+                int p1 = power / 2;
+            }
+        }
+        if (arr1[i] != arr2[i])
+        {
+            cnt++;
+        }
+            
+    }
+    cout << min(cnt, abs(sum2 - sum1) + 1) <<endl;
 }
 
 int main(int argc, char const *argv[])

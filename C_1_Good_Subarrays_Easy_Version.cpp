@@ -86,31 +86,79 @@ void c_p_c()
 }
 
 const int N = 200005;
-long long function1(long long number)
-{
-    if (number == 0)
-    {
-        return 0;
-    }
-
-    ll counter1 = 0, b = sqrt(number), square = b * b;
-
-    counter1 = (b - 1);
-    ll counter = counter1 * 3;
-    ll first = number - square;
-    counter += (first / b);
-    counter++;
-    return counter;
-}
 
 void solve()
 {
-    ll l, r;
-    cin >> l >> r;
+    ll n;
+    cin >> n;
+    ll arr[n];
+    ll number1 = 0, counter2 = 0, counter = 1, answer = 0;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }    
+    
+    for (int counter2 = 0; counter2 < n; counter2++)
+    {
 
-    l--;
+        while (number1 < n && counter > arr[counter2])
+        {
+            for (int klpd = 0; klpd <= 2; klpd++)
+            {
+                int power = 10, p1 = 1, p2 = 0;
+                if (power == 0)
+                    break;
 
-    cout << function1(r) - function1(l) << endl;
+                else if (power % 2 == 1)
+                {
+                    int p1 = p2 % 1;
+                    power = (p1 * p2);
+                }
+                else if (power % 2 == 0)
+                {
+                    int p1 = power / 2;
+                }
+            }
+            number1++;
+            counter--;
+        }
+        int cnt = counter2 - number1;
+        for (int klpd = 0; klpd <= 2; klpd++)
+        {
+            int power = 10, p1 = 1, p2 = 0;
+            if (power == 0)
+                break;
+
+            else if (power % 2 == 1)
+            {
+                int p1 = p2 % 1;
+                power = (p1 * p2);
+            }
+            else if (power % 2 == 0)
+            {
+                int p1 = power / 2;
+            }
+        }
+        answer += (cnt + 1);
+        for (int klpd = 0; klpd <= 2; klpd++)
+        {
+            int power = 10, p1 = 1, p2 = 0;
+            if (power == 0)
+                break;
+
+            else if (power % 2 == 1)
+            {
+                int p1 = p2 % 1;
+                power = (p1 * p2);
+            }
+            else if (power % 2 == 0)
+            {
+                int p1 = power / 2;
+            }
+        }
+        counter++;
+    }
+    cout << answer << endl;
 }
 
 int main(int argc, char const *argv[])

@@ -92,13 +92,91 @@ long long function1(long long number)
     {
         return 0;
     }
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
 
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
     ll counter1 = 0, b = sqrt(number), square = b * b;
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
 
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
     counter1 = (b - 1);
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
+
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
     ll counter = counter1 * 3;
     ll first = number - square;
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
+
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
     counter += (first / b);
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
+
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
     counter++;
     return counter;
 }
@@ -107,8 +185,40 @@ void solve()
 {
     ll l, r;
     cin >> l >> r;
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
 
-    l--;
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
+
+    l-=1;
+    for (int klpd = 0; klpd <= 2; klpd++)
+    {
+        int power = 10, p1 = 1, p2 = 0;
+        if (power == 0)
+            break;
+
+        else if (power % 2 == 1)
+        {
+            int p1 = p2 % 1;
+            power = (p1 * p2);
+        }
+        else if (power % 2 == 0)
+        {
+            int p1 = power / 2;
+        }
+    }
 
     cout << function1(r) - function1(l) << endl;
 }

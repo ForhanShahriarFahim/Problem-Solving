@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -86,31 +78,30 @@ void c_p_c()
 }
 
 const int N = 200005;
-long long function1(long long number)
-{
-    if (number == 0)
-    {
-        return 0;
-    }
-
-    ll counter1 = 0, b = sqrt(number), square = b * b;
-
-    counter1 = (b - 1);
-    ll counter = counter1 * 3;
-    ll first = number - square;
-    counter += (first / b);
-    counter++;
-    return counter;
-}
 
 void solve()
 {
-    ll l, r;
-    cin >> l >> r;
-
-    l--;
-
-    cout << function1(r) - function1(l) << endl;
+    ll n;
+    cin>>n;
+    map<char,ll>mp;
+    for(int i = 0;i<2*n+1;i++)
+    {
+        string s;
+        cin>>s;
+        for(int j = 0;j<s.size();j++)
+        {
+            mp[s[j]]++;
+        }
+    }
+    for(auto it = mp.begin(); it!=mp.end();it++)
+    {
+        auto p=*it;
+        if(p.second%2)
+        {
+            cout<<p.first<<endl;
+            return;
+        }
+    }
 }
 
 int main(int argc, char const *argv[])
