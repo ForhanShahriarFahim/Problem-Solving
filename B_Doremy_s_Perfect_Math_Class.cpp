@@ -30,6 +30,7 @@ void solve()
         
     
     cout << arr[n - 1] / variable << endl;
+    
 }
 
     int main(int argc, char const *argv[])
