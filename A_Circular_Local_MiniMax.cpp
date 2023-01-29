@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -90,29 +82,55 @@ const int N = 200005;
 void solve()
 {
     int n;
-    cin >> n;
-    if (n % 2 != 0)
+    cin>>n;
+    int arr[n];
+    vector<int>v;
+    bool flag = false;
+    for(int i = 0;i<n;i++)
     {
-        if (n <= 3)
-            cout << "NO" << endl;
-        else
-        {
-            cout<<"YES"<<endl;
-            int mid = n / 2;
-            for(int i = 0;i<n/2;i++)
-                cout << mid - 1 << " " << -mid << " ";
-            cout<<mid-1;
-        }
+        cin>>arr[i];
     }
-    else
+    if(n%2==1)
     {
-        cout << "YES" << endl;
-        for (int i = 0; i < n / 2; i++)
-        {
-            cout << 1 << " " << -1 << " ";
-        }
+        cout<<"NO"<<endl;
+        return;
     }
-    cout << endl;
+    sort(arr,arr+n);
+    for(int i = 0,j = n/2;i<n/2;i++,j++)
+    {
+        v.push_back(arr[i]);
+        v.push_back(arr[j]);
+    }
+    v.pb(v[0]);
+    v.pb(v[1]);
+    for(int i = 1;i<v.size()-1;i++)
+    {
+        //dbg(arr[0]);
+        if(v[i]>v[i-1] && v[i]>v[i+1]) continue;
+        else if(v[i]<v[i-1] && v[i]<v[i+1]) continue;
+        else 
+        {
+            flag = true;
+            break;
+        }
+
+    }
+    if(flag)
+    {
+        
+        cout<<"NO"<<endl;
+    }
+    else 
+    {
+        cout<<"YES"<<endl;
+        for(int i = 0;i<n;i++)
+        {
+            cout<<v[i]<<" ";
+
+        }
+        cout<<endl;
+    }
+
 }
 
 int main(int argc, char const *argv[])

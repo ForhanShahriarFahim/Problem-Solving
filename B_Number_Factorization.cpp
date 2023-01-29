@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -85,34 +77,81 @@ void c_p_c()
 #endif
 }
 
-const int N = 200005;
+//const int N = 200005;
+const int N = 1e6+10;
+int cnt, prime[N], flag[N], res;
+void sieve()
+{
+    flag[1] = 1;
+    for(int i = 2;i<=1e6;i++)
+    {
+        if(!flag[i])
+        {
+            prime[++cnt] = i;
+            for(int j = i*2;j<=1e6;j+=i) 
+            {
+                flag[j] = 1;
+            }
+        }
+    }
+}
+map<int, int>mapp;
+int factorial(int value)
+{
+    int rem = 1;
+    for(int i =2;i*i<=value;i++)
+    {
+        if(value%i == 0)
+        {
+            int cnt = 0;
+            while(value%i==0)
+            {
+
+                cnt++;
+
+                value/=i;
+
+            }
+            mapp[i] = cnt;
+            rem = max(rem,cnt);
+        }
+    }
+    if(value!=1)
+    {
+        mapp[value] = 1;
+    }
+        
+    return rem;
+}
 
 void solve()
 {
+   
     int n;
-    cin >> n;
-    if (n % 2 != 0)
+    cin>>n;
+
+    int result = 0;
+
+    int rem = factorial(n);
+
+    for(int i = 0;i<rem;i++)
     {
-        if (n <= 3)
-            cout << "NO" << endl;
-        else
+        int rem = 1;
+
+        for(auto it:mapp)
         {
-            cout<<"YES"<<endl;
-            int mid = n / 2;
-            for(int i = 0;i<n/2;i++)
-                cout << mid - 1 << " " << -mid << " ";
-            cout<<mid-1;
+            if(it.ss>0)
+            {
+
+                mapp[it.ff]-=1;
+
+                rem*=it.ff;
+            }
         }
+
+        result+=rem;
     }
-    else
-    {
-        cout << "YES" << endl;
-        for (int i = 0; i < n / 2; i++)
-        {
-            cout << 1 << " " << -1 << " ";
-        }
-    }
-    cout << endl;
+    cout<<result<<endl;
 }
 
 int main(int argc, char const *argv[])
@@ -123,6 +162,7 @@ int main(int argc, char const *argv[])
     cout.tie(0);
 #ifndef ONLINE_JUDGE
 #endif
+    sieve();
     int t = 1;
     cin >> t;
     for (int i = 0; i < t; i++)

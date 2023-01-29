@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -90,29 +82,39 @@ const int N = 200005;
 void solve()
 {
     int n;
-    cin >> n;
-    if (n % 2 != 0)
+    cin>>n;
+    int arr[n][n-1];
+    for(int i = 0;i<n;i++)
     {
-        if (n <= 3)
-            cout << "NO" << endl;
-        else
+        for(int j = 0;j<n-1;j++)
         {
-            cout<<"YES"<<endl;
-            int mid = n / 2;
-            for(int i = 0;i<n/2;i++)
-                cout << mid - 1 << " " << -mid << " ";
-            cout<<mid-1;
+            cin>>arr[i][j];
         }
     }
-    else
+    int first_index = -1, seconde_ind = -1;
+    for(int i = 0;i<n;i++)
     {
-        cout << "YES" << endl;
-        for (int i = 0; i < n / 2; i++)
+        bool flag = false;
+        for(int j = 0;j<n;j++)
         {
-            cout << 1 << " " << -1 << " ";
+
+            if(i == j) continue;
+            if(arr[i][1] == arr[j][0])
+            {
+                first_index = i;
+                seconde_ind = j;
+                flag = true;
+                break;
+            }
         }
+        if(flag) break;
     }
-    cout << endl;
+    cout<<arr[first_index][0]<<" ";
+    for(int i = 0;i<n-1;i++)
+    {
+        cout<<arr[seconde_ind][i]<<" ";
+    }
+    cout<<endl;
 }
 
 int main(int argc, char const *argv[])

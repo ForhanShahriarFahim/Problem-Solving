@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -86,33 +78,28 @@ void c_p_c()
 }
 
 const int N = 200005;
-
+const int MOD = 1e9 + 7;
 void solve()
 {
-    int n;
+    ll n;
     cin >> n;
-    if (n % 2 != 0)
+    long long ans = 0;
+    ll temp = n*(n-1);
+    if(n == 1)
     {
-        if (n <= 3)
-            cout << "NO" << endl;
-        else
-        {
-            cout<<"YES"<<endl;
-            int mid = n / 2;
-            for(int i = 0;i<n/2;i++)
-                cout << mid - 1 << " " << -mid << " ";
-            cout<<mid-1;
-        }
+        cout<<0<<endl;
+        return;
     }
-    else
-    {
-        cout << "YES" << endl;
-        for (int i = 0; i < n / 2; i++)
+    
+        for (int i = 1; i <= n; i++)
         {
-            cout << 1 << " " << -1 << " ";
+            temp = (temp * i);
+            temp %= MOD;
         }
-    }
-    cout << endl;
+        cout << temp << endl;
+    
+    
+    
 }
 
 int main(int argc, char const *argv[])
