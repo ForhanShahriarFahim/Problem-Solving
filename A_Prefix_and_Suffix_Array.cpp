@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -89,38 +81,39 @@ const int N = 200005;
 
 void solve()
 {
-    int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
-    {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
-        {
 
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
-        }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
+    int n;
+    cin >> n;
+    string a[2 * n], temp, restore;
+    vector<string> vec;
+    int l = 2*(n-1);
+    for (int i = 0; i <l; i++)
+    {
+        cin >> a[i];
+    }
+    for (int i = 0; i <l; i++)
+    {
+        if (a[i].size() == n-1)
+            vec.push_back(a[i]);
+    }
+
+    if (vec[0].substr(1) != vec[1].substr(0, n - 2))
+    {
+        swap(vec[0], vec[1]);
+    }
+    temp = vec[0] + vec[1][n - 2];
+
+    restore = temp;
+    reverse(restore.begin(), restore.end());
+    
+    if (temp == restore)
+    {
+        cout << "YES" << endl;
     }
     else
     {
-        for (int i = 0; i < n; i++)
-        {
-            cout << 9 - (s[i] - '0');
-        }
-        cout << endl;
+        cout << "NO" << endl;
+
     }
 }
 

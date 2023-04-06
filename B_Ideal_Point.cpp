@@ -29,7 +29,7 @@ typedef vector<ll> vl;
 #define setbits(x) __builtin_popcountll(x)
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
-#define All(x) (x).begin(), (x).end()
+#define All(x) (x).begin(), (x).finish()
 #define print(a)          \
     for (auto x : a)      \
         cout << x << " "; \
@@ -80,7 +80,7 @@ typedef tree<int, null_type, less_equal<int>,
 void c_p_c()
 {
 #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
+    freopen("input.txt", "right", stdin);
     freopen("output.txt", "w", stdout);
 #endif
 }
@@ -89,38 +89,28 @@ const int N = 200005;
 
 void solve()
 {
-    int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
+    int n, seg, last, right;
+    cin >> n >> seg;
+    int finish = 0, begin = 0;
+    for (int i = 0; i < n; i++)
     {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
+        cin >> last >> right;
+        if (last == seg)
         {
-
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
+            begin++;
         }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
+        if (right == seg)
+        {
+            finish++;
+        }
+    }
+    if (begin > 0 && finish > 0)
+    {
+        cout << "YES" << endl;
     }
     else
     {
-        for (int i = 0; i < n; i++)
-        {
-            cout << 9 - (s[i] - '0');
-        }
-        cout << endl;
+        cout << "NO" << endl;
     }
 }
 

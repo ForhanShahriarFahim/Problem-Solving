@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-#include <ext/pb_ds/detail/standard_policies.hpp>
-using namespace __gnu_pbds;
+
 using namespace std;
 //**************************************************************************************************************************************************************************
 typedef long long ll;
@@ -43,19 +40,6 @@ typedef vector<ll> vl;
     cout << endl
 //**************************************************************************************************************************************************************************
 char gap = 32;
-template <typename T>
-ostream &operator<<(ostream &os, const vector<T> &v)
-{
-    os << '{';
-    for (const auto &x : v)
-        os << gap << x;
-    return os << '}';
-}
-template <typename A, typename B>
-ostream &operator<<(ostream &os, const pair<A, B> &p)
-{
-    return os << '(' << p.first << gap << p.second << ')';
-}
 
 void dbg_out() { cerr << endl; }
 template <typename Head, typename... Tail>
@@ -71,10 +55,6 @@ void dbg_out(Head H, Tail... T)
 #define dbg(...)
 #endif
 
-typedef tree<int, null_type, less_equal<int>,
-             rb_tree_tag,
-             tree_order_statistics_node_update>
-    ordered_set;
 //*************************************************************************************************************************************************************************
 
 void c_p_c()
@@ -86,41 +66,29 @@ void c_p_c()
 }
 
 const int N = 200005;
-
+ll sum[N];
 void solve()
 {
     int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
+    cin >> n;
+    int x;
+    
+    sum[0]=0;
+    vector<pair<int, int>> v;
+    for (int i = 0; i < n; i++)
     {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
-        {
-
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
-        }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
+        cin >> x;
+        sum[i+1]=sum[i]+x;
     }
-    else
+    int m, t;
+    cin >> m;
+   
+    for (int i = 0; i < m; i++)
     {
-        for (int i = 0; i < n; i++)
-        {
-            cout << 9 - (s[i] - '0');
-        }
-        cout << endl;
+        cin >> t;
+        
+        int ans = lower_bound(sum,sum+n,t)-sum;
+        cout<<ans<<endl;
     }
 }
 
@@ -133,7 +101,7 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    cin >> t;
+    // cin >> t;
     for (int i = 0; i < t; i++)
         solve();
     // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";

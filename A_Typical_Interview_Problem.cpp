@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -87,41 +79,45 @@ void c_p_c()
 
 const int N = 200005;
 
+
 void solve()
 {
-    int n;
+    int value;
     string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
-    {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
-        {
+    cin >> value;
+    string ans = "";
+    cin >> s;
 
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
-        }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
-    }
-    else
+    int lp = 1000;
+    for (int i = 1; i <= lp; i++)
     {
-        for (int i = 0; i < n; i++)
+        if (i % 3 == 0)
         {
-            cout << 9 - (s[i] - '0');
+            ans += 'F';
         }
-        cout << endl;
+            
+        if (i % 5 == 0)
+        {
+            ans += 'B';
+        }
+            
     }
+   
+    for (int i = 0; i + value < ans.size(); i++)
+    {
+        bool track = true;
+        for (int j = 0; j < value; j++)
+        {
+            if (ans[i + j] != s[j])
+                track = false;
+        }
+        if (track)
+        {
+            cout << "YES" << endl;
+            return;
+        }
+    }
+    cout << "NO" << endl;
 }
 
 int main(int argc, char const *argv[])

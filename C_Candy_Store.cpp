@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -87,41 +79,69 @@ void c_p_c()
 
 const int N = 200005;
 
-void solve()
+int gcd(int a, int b)
 {
-    int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
+    if (b == 0)
     {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
-        {
-
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
-        }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
+        return a;
     }
     else
     {
-        for (int i = 0; i < n; i++)
-        {
-            cout << 9 - (s[i] - '0');
-        }
-        cout << endl;
+        return gcd(b, a % b);
     }
+}
+
+int lcm(int a, int b)
+{
+    return (a * b) / gcd(a, b);
+}
+
+void solve()
+{
+    int n;
+    cin>>n;
+    ll arr[n],vec [n];
+    ll resultant = 1, finish = 1;
+    
+    for(int i = 1;i<=n;i++)
+    {
+        cin>>arr[i]>>vec [i];
+    }
+    ll LongestCommon =vec [1];
+    for(int i = 2;i<=n;i++)
+    {
+        bool flag = true;
+        ll checker = lcm(LongestCommon,vec [i]);
+        
+        if(arr[i]%(checker/vec [i])!=0)
+        {
+            flag = false;
+        }
+        if(LongestCommon!=checker)
+        {
+            for(int j = finish;j<i;j++)
+            {
+                if(arr[j]%(checker/vec [j])!=0)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if(flag) 
+        {
+
+            LongestCommon = checker;
+        }
+        else 
+        {
+            finish = i;
+            resultant++;
+            LongestCommon = vec [i];
+        }
+    }
+    cout<<resultant<<endl;
+    
 }
 
 int main(int argc, char const *argv[])

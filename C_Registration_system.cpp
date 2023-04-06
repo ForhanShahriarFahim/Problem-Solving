@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -89,38 +81,26 @@ const int N = 200005;
 
 void solve()
 {
-    int n;
+    int test;
+    cin>>test;
     string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
+    map<string, int>mp;
+    for(int i = 0;i<test;i++)
     {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
+        cin>>s;
+        if(mp.find(s)==mp.end())
         {
-
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
+            
+            mp.insert({s, ++mp[s]});
+            cout<<"OK"<<endl;
         }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
-    }
-    else
-    {
-        for (int i = 0; i < n; i++)
+        else 
         {
-            cout << 9 - (s[i] - '0');
+            cout<<s<<mp[s]<<endl;
+            mp[s]++;
         }
-        cout << endl;
+           
+        
     }
 }
 
@@ -133,7 +113,7 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for (int i = 0; i < t; i++)
         solve();
     // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";

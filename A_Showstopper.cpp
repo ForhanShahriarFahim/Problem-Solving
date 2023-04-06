@@ -90,37 +90,34 @@ const int N = 200005;
 void solve()
 {
     int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
+    cin >> n;
+    int a[n], b[n];
+    int mx1 = 0, mx2 = 0;
+    for (int i = 0; i < n; i++)
     {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
-        {
-
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
-        }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
+        cin >> a[i];
+        
     }
-    else
+    for (int i = 0; i < n; i++)
     {
-        for (int i = 0; i < n; i++)
+        cin >> b[i];
+    }
+    int cnt = 1;
+    for(int i = 0;i<n-1;i++)
+    {
+        if (max(a[i], b[i]) > max(a[n - 1], b[n - 1]) || min(a[i], b[i]) > min(a[n - 1], b[n - 1]))
         {
-            cout << 9 - (s[i] - '0');
+            cnt = 0;
+            break;
         }
-        cout << endl;
+    }
+    if(cnt)
+    {
+        cout<<"YES"<<endl;
+    }
+    else 
+    {
+        cout<<"NO"<<endl;
     }
 }
 

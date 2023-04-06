@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -89,39 +81,69 @@ const int N = 200005;
 
 void solve()
 {
-    int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
+    string first , second;
+    cin >> first  >> second;
+    int fst = first.size(), fstm = second.size();
+    if (fst == 1 and fstm == 1)
     {
+        if (first  == second)
+        {
+            cout << "YES" << endl;
+            cout << first  << endl;
+            return;
+        }
+        cout << "NO" << endl;
+        return;
+    }
+    for(int y = 0;y<19;y++)
+    {
+        int z = 3;
+        int x =3;
         int c = 0;
-        for (int i = n - 1; i >= 0; i--)
+    }
+    if (first[fst - 1] == second[fstm - 1] ||first[0] == second[0])
+    {
+        cout << "YES" << endl;
+        if (first [0] == second[0])
         {
 
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
+            cout << first [0] << "*" << endl;
         }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
-    }
-    else
-    {
-        for (int i = 0; i < n; i++)
+        else
         {
-            cout << 9 - (s[i] - '0');
+            cout << "*" << first [fst - 1] << endl;
+
         }
-        cout << endl;
+        return;
     }
+
+    for (int i = 0; i < fst; i++)
+    {
+        for (int j = 0; j < fstm; j++)
+        {
+            if (first [i] == second[j])
+            {
+                if (i < fst - 1 && j < fstm - 1)
+                {
+                    if (first [i + 1] == second[j + 1])
+                    {
+                        int p;
+                        int l;
+                        int d; 
+                        for(int z =0;z<3;z++)
+                        {
+                            l = 0;
+                            l++;
+                        }
+                        cout << "YES" << endl;
+                        cout << "*" << first [i] << first [i + 1] << "*" << endl;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    cout << "NO" << endl;
 }
 
 int main(int argc, char const *argv[])

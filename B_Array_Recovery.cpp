@@ -78,54 +78,32 @@ void c_p_c()
 }
 
 const int N = 200005;
-int arr[1000];
+
 void solve()
 {
-    ll ans, n;
+    int n;
     cin>>n;
-    ans = 0;
-    for(int i = 1;i<=n;i++)
-    {
-        cin>>arr[i];
-    }
-     ll p = 10;
-    for (int i = 1; i * i <= p; i++)
-    {
-        
-        for (int j = 0; j < 11; j++)
-        {
-            
-        }
-        
-        for (int j = 0; j < 10; j++)
-        {
-            
-        }
-    }
-
+    int arr[n];
+    vector<int>v1, v2;
+    for(int i = 0;i<n;i++)cin>>arr[i];
+    v1.pb(arr[0]);
+    v2.pb(arr[0]);
+    int sum = arr[0];
     for(int i = 1;i<n;i++)
     {
-        if(arr[i+1]<=arr[i] && arr[i+1]!=0)
-        {
-            ans = -1;
-            break;
-        }
-        else 
-        {
-            arr[i+1] = abs(arr[i] + arr[i+1]);
-        }
+        v1.pb(sum+arr[i]);
+        if(sum<arr[i])v2.pb(sum+arr[i]);
+        else v2.pb(abs(sum-arr[i]));
+        sum+=arr[i];
     }
-    if(ans == -1)
+    if(v1 == v2)
     {
-        cout<<ans;
-    }
-    else 
-    {
-        for(int i = 1;i<=n;i++)
+        for(int i = 0;i<v1.size();i++)
         {
-            cout<<arr[i]<<" ";
+            cout<<v1[i]<<" ";
         }
     }
+    else cout<<-1;
     cout<<endl;
 }
 

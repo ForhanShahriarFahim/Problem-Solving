@@ -30,17 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
-#define print(a)          \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << endl
-#define print1(a)    \
-    for (auto x : a) \
-    cout << x.ff << " " << x.ss << endl
-#define print2(a, x, y)         \
-    for (int i = x; i < y; i++) \
-        cout << a[i] << " ";    \
-    cout << endl
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -86,44 +78,67 @@ void c_p_c()
 }
 
 const int N = 200005;
+bool chk(vector<ll> a)
+{
+    for (ll i = 0; i < a.size() - 1; i++)
+        if (a[i] != a[i + 1])
+            return false;
+    return true;
+}
 
 void solve()
 {
-    int n;
-    string s;
-    cin >> n >> s;
-    string res = "";
-    if (s[0] == '9')
-    {
-        int c = 0;
-        for (int i = n - 1; i >= 0; i--)
-        {
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++)
+        cin >> a[i];
 
-            int digit = s[i] - '0' + c;
-            if (digit <= 1)
-            {
-                res += '0' + (1 - digit);
-                c = 0;
-            }
-            else
-            {
-                res += '0' + (11 - digit);
-                c = 1;
-            }
-        }
-        reverse(res.begin(), res.end());
-        cout << res << endl;
-    }
-    else
+    if (chk(a))
     {
-        for (int i = 0; i < n; i++)
-        {
-            cout << 9 - (s[i] - '0');
-        }
-        cout << endl;
+        cout << 0 << endl;
+        return;
     }
+    vector<vector<ll>> ans;
+    vector<ll> prev = a;
+    while (chk(a) == false)
+    {
+        ll mini = INT_MAX;
+        ll ind = -1;
+        for (ll i = 0; i < n; i++)
+        {
+            if (a[i] < mini)
+            {
+                mini = a[i];
+                ind = i;
+            }
+        }
+        bool ok = false;
+        for (ll i = 0; i < n; i++)
+        {
+            if (a[i] != mini and a[i] > mini)
+            {
+                ll y = (a[i] / mini);
+                if (a[i] % mini != 0)
+                {
+                    y++;
+                }
+                ans.push_back({i, ind});
+                a[i] = y;
+                ok = true;
+            }
+        }
+        if (a == prev)
+        {
+            cout << -1 << endl;
+            return;
+        }
+        prev = a;
+    }
+    cout << ans.size() << endl;
+    for (auto it : ans)
+        cout << it[0] + 1 << " " << it[1] + 1 << endl;
 }
-
 int main(int argc, char const *argv[])
 {
     // c_p_c();
