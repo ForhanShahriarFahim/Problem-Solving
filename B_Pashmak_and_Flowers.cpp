@@ -15,12 +15,13 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 #define mp make_pair
 #define pb push_back
-#define fi first
-#define se second
+#define ff first
+#define ss second
 #define mod 1000000007
 #define pi acos(-1.0)
 #define eps 1e-9
 #define inf 1e18
+#define endl "\n"
 #define sz(x) (int)((x).size())
 #define gcd(a, b) __gcd(a, b)
 #define LCM(x, y) (((x) / __gcd((x), (y))) * (y))
@@ -29,6 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -73,30 +77,36 @@ void c_p_c()
 #endif
 }
 
+const int N = 200005;
+
 void solve()
 {
-    int n,x,one = 0,zero = 0,ans=-1;
-    cin >> n;
-    int arr[n];    
-    for (int i = 0; i < n; i++)
-    {
-        cin>>x;
-        if(x == 1)
-        {
-            one++;
-            if(zero>0) zero--;
-        } 
-        else 
-        {
-            zero++;
-            if(zero>ans)ans = zero;
-        }
-    }
-        cout<<one+ans<<endl;
-    
-}
-    
+    ll n;
+    cin>>n;
+    ll arr[n];
+    ll mx = 0, mn = INT_MAX;
 
+    for(int i = 0;i<n;i++)
+    {
+        cin>>arr[i];
+        mx = max(arr[i], mx);
+        mn = min(arr[i], mn);
+    }
+    ll dif = mx-mn;
+    //sort(arr,arr+n);
+    ll first = 0, last = 0; 
+    for(int i = 0;i<n;i++)
+    {
+        if(arr[i] == mn) first++;
+        else if(arr[i] == mx) last++;
+    }
+    if(first == n || last == n)
+    {
+        cout<<dif<<" "<<n*(n-1)/2;
+    }
+    else cout<<dif<<" "<<first*last<<endl;
+    //cout<<first*last<<endl;
+}
 
 int main(int argc, char const *argv[])
 {
@@ -107,9 +117,9 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    // cin >> t;
+    //cin >> t;
     for (int i = 0; i < t; i++)
         solve();
-    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
