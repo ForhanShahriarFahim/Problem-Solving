@@ -81,50 +81,16 @@ const int N = 200005;
 
 void solve()
 {
-    int m,s;
-   cin>>m>>s;
-  string mini, maxi;
-  if(s == 0)
+    int n,m;
+    cin>>n>>m;
+    int ans = 0;    
+    while(n<m)
     {
-        if(m == 1)
-        {
-            cout<<0<<" "<<0<<endl;
-            return;
-        }
-        else if(m>1)
-        {
-            cout<<-1<<" "<<-1<<endl;
-            return;
-        }
-     }
-    
-    for(int i = 0;i<m;i++)
-    {
-        int k = min(9,s);
-        maxi.pb('0' + k);
-        s-=k;        
+        if(m%2 == 0)m/=2;
+        else m+=1;
+        ans++;
     }
-    if(s>0)
-    {
-        cout<<-1<<" "<<-1<<endl;
-        return;
-    }
-    for(int i = m-1;i>=0;i--)
-    {
-        mini.pb(maxi[i]);
-    } 
-
-    int ind = 0, cnt;
-    
-    while(mini[ind] == '0')
-    {
-        ind++;        
-    }
-    mini[0]++;
-    //dbg(ind);
-    mini[ind]--;
-    
-    cout<<mini<<" "<<maxi<<endl;
+    cout<<ans+(n-m)<<endl;
 }
 
 int main(int argc, char const *argv[])

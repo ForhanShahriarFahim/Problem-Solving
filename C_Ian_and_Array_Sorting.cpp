@@ -81,50 +81,28 @@ const int N = 200005;
 
 void solve()
 {
-    int m,s;
-   cin>>m>>s;
-  string mini, maxi;
-  if(s == 0)
+    ll number;
+    cin>>number;
+    vector<ll>ans(number);
+    for(int i = 0;i<number;i++)
+        cin>>ans[i];
+    bool trigger  = true;
+    for(int i = number-1;i>0;i-=2)
     {
-        if(m == 1)
+        if(ans[i]<ans[i-1])
         {
-            cout<<0<<" "<<0<<endl;
-            return;
+            if(i-1==0)
+                trigger  = false;
+            else
+                ans[i - 2] = ans[i - 2] - (ans[i - 1] - ans[i]);
         }
-        else if(m>1)
-        {
-            cout<<-1<<" "<<-1<<endl;
-            return;
-        }
-     }
-    
-    for(int i = 0;i<m;i++)
-    {
-        int k = min(9,s);
-        maxi.pb('0' + k);
-        s-=k;        
+        else if(i-2>=0)
+            ans[i - 2] = ans[i - 2] + (ans[i] - ans[i - 1]);
     }
-    if(s>0)
-    {
-        cout<<-1<<" "<<-1<<endl;
-        return;
-    }
-    for(int i = m-1;i>=0;i--)
-    {
-        mini.pb(maxi[i]);
-    } 
-
-    int ind = 0, cnt;
-    
-    while(mini[ind] == '0')
-    {
-        ind++;        
-    }
-    mini[0]++;
-    //dbg(ind);
-    mini[ind]--;
-    
-    cout<<mini<<" "<<maxi<<endl;
+    if(trigger)
+        cout<<"YES"<<endl;
+    else 
+        cout<<"NO"<<endl;
 }
 
 int main(int argc, char const *argv[])
@@ -136,7 +114,7 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 0; i < t; i++)
         solve();
     // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";

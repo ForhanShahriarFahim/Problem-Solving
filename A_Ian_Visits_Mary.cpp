@@ -81,51 +81,14 @@ const int N = 200005;
 
 void solve()
 {
-    int m,s;
-   cin>>m>>s;
-  string mini, maxi;
-  if(s == 0)
-    {
-        if(m == 1)
-        {
-            cout<<0<<" "<<0<<endl;
-            return;
-        }
-        else if(m>1)
-        {
-            cout<<-1<<" "<<-1<<endl;
-            return;
-        }
-     }
-    
-    for(int i = 0;i<m;i++)
-    {
-        int k = min(9,s);
-        maxi.pb('0' + k);
-        s-=k;        
-    }
-    if(s>0)
-    {
-        cout<<-1<<" "<<-1<<endl;
-        return;
-    }
-    for(int i = m-1;i>=0;i--)
-    {
-        mini.pb(maxi[i]);
-    } 
+    int first, second;
+    cin >> first >> second;
 
-    int ind = 0, cnt;
-    
-    while(mini[ind] == '0')
-    {
-        ind++;        
-    }
-    mini[0]++;
-    //dbg(ind);
-    mini[ind]--;
-    
-    cout<<mini<<" "<<maxi<<endl;
+    cout << 2 << endl;
+    cout << 1 << " " << second - 1 << endl;
+    cout << first << " " << second << endl;
 }
+
 
 int main(int argc, char const *argv[])
 {
@@ -136,7 +99,7 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 0; i < t; i++)
         solve();
     // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";

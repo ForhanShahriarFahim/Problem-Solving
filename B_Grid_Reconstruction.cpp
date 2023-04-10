@@ -81,50 +81,36 @@ const int N = 200005;
 
 void solve()
 {
-    int m,s;
-   cin>>m>>s;
-  string mini, maxi;
-  if(s == 0)
+    ll number;
+    cin >> number ;
+    vector<vector<ll>> result(2, vector<ll>(number ));
+    ll maximum = 2 * number ;
+    result[0][0] = maximum;
+    result[1][number  - 1] = maximum - 1;
+    ll top = 1, end = maximum - 2;
+    for (int i = 0; i < number  - 1; i++)
     {
-        if(m == 1)
+        if (i & 1)
         {
-            cout<<0<<" "<<0<<endl;
-            return;
+            result[1][i] = end - 1;
+            result[0][i + 1] = end;
+            end -= 2;
         }
-        else if(m>1)
+        else
         {
-            cout<<-1<<" "<<-1<<endl;
-            return;
+            result[1][i] = top;
+            result[0][i + 1] = top + 1;
+            top += 2;
         }
-     }
-    
-    for(int i = 0;i<m;i++)
-    {
-        int k = min(9,s);
-        maxi.pb('0' + k);
-        s-=k;        
     }
-    if(s>0)
+    for (int i = 0; i < 2; i++)
     {
-        cout<<-1<<" "<<-1<<endl;
-        return;
+        for (int j = 0; j < number; j++)
+        {
+            cout << result[i][j] << " ";
+        }
+        cout << endl;
     }
-    for(int i = m-1;i>=0;i--)
-    {
-        mini.pb(maxi[i]);
-    } 
-
-    int ind = 0, cnt;
-    
-    while(mini[ind] == '0')
-    {
-        ind++;        
-    }
-    mini[0]++;
-    //dbg(ind);
-    mini[ind]--;
-    
-    cout<<mini<<" "<<maxi<<endl;
 }
 
 int main(int argc, char const *argv[])
@@ -136,7 +122,7 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 0; i < t; i++)
         solve();
     // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
