@@ -15,28 +15,32 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 #define mp make_pair
 #define pb push_back
-#define fi first
-#define se second
+#define ff first
+#define ss second
 #define mod 1000000007
 #define pi acos(-1.0)
 #define eps 1e-9
 #define inf 1e18
-#define sz(x) (int)((x).size())
+#define endl "\n"
+#define sz(second) (int)((second).size())
 #define gcd(a, b) __gcd(a, b)
-#define LCM(x, y) (((x) / __gcd((x), (y))) * (y))
-#define mem(x, n) memset(x, n, sizeof(x))
-#define setbits(x) __builtin_popcountll(x)
-#define zrobits(x) __builtin_ctzll(x)
-#define ps(x, y) fixed << setprecision(y) << x
-#define All(x) (x).begin(), (x).end()
+#define LCM(second, y) (((second) / __gcd((second), (y))) * (y))
+#define mem(second, n) memset(second, n, sizeof(second))
+#define setbits(second) __builtin_popcountll(second)
+#define zrobits(second) __builtin_ctzll(second)
+#define ps(second, y) fixed << setprecision(y) << second
+#define All(second) (second).begin(), (second).end()
+#define print(a) for (auto second : a) cout << second << " "; cout << endl
+#define print1(a) for (auto second : a) cout << second.ff << " " << second.ss << endl
+#define print2(a, second, y) for (int i = second; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
-ostream &operator<<(ostream &os, const vector<T> &v)
+ostream &operator<<(ostream &os, const vector<T> &vec)
 {
     os << '{';
-    for (const auto &x : v)
-        os << gap << x;
+    for (const auto &second : vec)
+        os << gap << second;
     return os << '}';
 }
 template <typename A, typename B>
@@ -73,26 +77,33 @@ void c_p_c()
 #endif
 }
 
+const int N = 200005;
+
 void solve()
 {
-    ll maxi = -1, n;
-    cin>>n;
-    vector<ll> arr(10e5, 0);
-    for(int i = 0;i<n;i++)
+    int numbre, second;
+    cin >> numbre;
+    vector<int> vec(110, 0);
+    int mx = 0;
+    bool flag = 0;
+    for (int i = 0; i < numbre; i++)
     {
-        ll x;
-        cin>>x;
-        arr[x]++;
-        maxi = max(maxi, x);
+        cin >> second;
+        mx = max(mx, second);
+        vec[second]++;
     }
-    vector<ll>b(10e5, 0);
-    b[0] = 0;
-    b[1] = arr[1];
-    for(int i = 2;i<=10e5;i++)
+    for (int i = 1; i <= mx; i++)
     {
-        b[i] = max(b[i-1], b[i-2] + (arr[i])*i);
+        if (vec[i - 1] < vec[i])
+        {
+            cout << "NO" << endl;
+            flag = true;
+            break;
+        }
     }
-    cout<<b[maxi];
+    if (flag == 0)
+        cout << "YES" << endl;
+
 }
 
 int main(int argc, char const *argv[])
@@ -104,9 +115,9 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 0; i < t; i++)
         solve();
-    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }

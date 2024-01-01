@@ -15,12 +15,13 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 #define mp make_pair
 #define pb push_back
-#define fi first
-#define se second
+#define ff first
+#define ss second
 #define mod 1000000007
 #define pi acos(-1.0)
 #define eps 1e-9
 #define inf 1e18
+#define endl "\n"
 #define sz(x) (int)((x).size())
 #define gcd(a, b) __gcd(a, b)
 #define LCM(x, y) (((x) / __gcd((x), (y))) * (y))
@@ -29,6 +30,9 @@ typedef vector<ll> vl;
 #define zrobits(x) __builtin_ctzll(x)
 #define ps(x, y) fixed << setprecision(y) << x
 #define All(x) (x).begin(), (x).end()
+#define print(a) for (auto x : a) cout << x << " "; cout << endl
+#define print1(a) for (auto x : a) cout << x.ff << " " << x.ss << endl
+#define print2(a, x, y) for (int i = x; i < y; i++) cout<< a[i] << " "; cout << endl    
 //**************************************************************************************************************************************************************************
 char gap = 32;
 template <typename T>
@@ -73,26 +77,31 @@ void c_p_c()
 #endif
 }
 
+const int N = 200005;
+
 void solve()
 {
-    ll maxi = -1, n;
-    cin>>n;
-    vector<ll> arr(10e5, 0);
-    for(int i = 0;i<n;i++)
-    {
-        ll x;
-        cin>>x;
-        arr[x]++;
-        maxi = max(maxi, x);
+    int n,k;
+    cin>>n>>k;
+
+    vector<int>v1(n),v2(n);
+    for(int i = 0;i<n;i++){
+        cin>>v1[i];
     }
-    vector<ll>b(10e5, 0);
-    b[0] = 0;
-    b[1] = arr[1];
-    for(int i = 2;i<=10e5;i++)
-    {
-        b[i] = max(b[i-1], b[i-2] + (arr[i])*i);
+    for(int i = 0;i<n;i++){
+        cin>>v2[i];
     }
-    cout<<b[maxi];
+    vector<int>dif(n+10);
+    dif[0] = v2[0];
+    for(int i = 1;i<n;i++) dif[i] = max(dif[i-1],v2[i]);
+    int ans = 0,temp = 0;
+    for(int i = 0;i<min(n,k);i++){
+        temp+=v1[i];
+        int p = k-(i+1);
+        int r = p*dif[i] + temp;
+        ans = max(ans, r);
+    }
+    cout<<ans<<endl;
 }
 
 int main(int argc, char const *argv[])
@@ -104,9 +113,9 @@ int main(int argc, char const *argv[])
 #ifndef ONLINE_JUDGE
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 0; i < t; i++)
         solve();
-    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    // cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
